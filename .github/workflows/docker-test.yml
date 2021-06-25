@@ -4,7 +4,7 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: Test using docker-compose
     runs-on: ubuntu-latest
     steps:
       - name: checkout pushed commit
@@ -14,5 +14,4 @@ jobs:
       - name: run test on docker-compose
         run: |
           docker-compose build
-          docker-compose up --abort-on-container-exit app 
-
+          docker-compose up --abort-on-container-exit app

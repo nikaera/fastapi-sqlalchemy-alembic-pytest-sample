@@ -7,9 +7,15 @@ services:
       dockerfile: docker/app/Dockerfile
     depends_on:
       - db
+      - waitfordb
     env_file:
       - docker/.env
     command: ["pytest", "-s"]
+  waitfordb:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - db
+    command: db:5432
   db:
     image: "postgres:13.1-alpine"
     container_name: "fastapi_pytest_db"
