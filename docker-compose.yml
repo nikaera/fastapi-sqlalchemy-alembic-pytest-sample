@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  app:
+    container_name: "fastapi_pytest_app"
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    depends_on:
+      - db
+    env_file:
+      - docker/.env
+    command: ["pytest", "-s"]
+  db:
+    image: "postgres:13.1-alpine"
+    container_name: "fastapi_pytest_db"
+    env_file:
+      - docker/.env
+    environment:
+      TZ: UTC
+    ports:
+      - 5432:5432
