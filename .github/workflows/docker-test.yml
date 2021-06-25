@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout pushed commit
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: run test on docker-compose
+        run: |
+          docker-compose build
+          docker-compose up --abort-on-container-exit app 
+
