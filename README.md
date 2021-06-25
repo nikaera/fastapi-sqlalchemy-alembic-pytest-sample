@@ -14,6 +14,14 @@ export POSTGRES_DB=fastapi_pytest_development
 export DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}
 ```
 
+When running locally, execute the following command on the PostgreSQL server you want to connect to beforehand, but not when running Docker.
+```sql
+# psql -h localhost postgres
+CREATE USER fastapi_pytest WITH PASSWORD 'fastapi_pytest';
+ALTER ROLE fastapi_pytest CREATEDB;
+CREATE DATABASE fastapi_pytest_development;
+```
+
 If you want to quickly verify the operation with Docker Compose, please refer to the following.
 
 ```bash
@@ -23,4 +31,5 @@ docker compose up --abort-on-container-exit --exit-code-from app
 # clean up after docker-compose
 docker compose down --rmi all --volumes --remove-orphans
 ```
+
 
