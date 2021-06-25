@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"ping": "pong"}
 
 @app.get("/items")
 def read_item(db: Session = Depends(get_database)):
